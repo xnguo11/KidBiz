@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KidBiz HQ 🚀</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFE135;
+    --orange: #FF6B35;
+    --blue: #1B4FFF;
+    --dark: #0D0D1A;
+    --light: #FFFDF0;
+    --green: #00C851;
+    --red: #FF3B3B;
+    --purple: #9B5DE5;
+    --pink: #FF69B4;
+    --card-bg: #FFFDF5;
+    --border: 3px solid var(--dark);
+    --shadow: 5px 5px 0px var(--dark);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--light);
+    background-image: 
+      radial-gradient(circle, rgba(255,225,53,0.15) 1px, transparent 1px),
+      radial-gradient(circle, rgba(27,79,255,0.08) 1px, transparent 1px);
+    background-size: 40px 40px, 20px 20px;
+    background-position: 0 0, 10px 10px;
+    min-height: 100vh;
+    color: var(--dark);
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    border-bottom: 4px solid var(--yellow);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Bangers', cursive;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    color: var(--yellow);
+    text-shadow: 3px 3px 0 var(--orange);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  nav {
+    display: flex;
+    gap: 8px;
+  }
+
+  nav button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border: 2px solid var(--yellow);
+    background: transparent;
+    color: var(--yellow);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  nav button:hover, nav button.active {
+    background: var(--yellow);
+    color: var(--dark);
+  }
+
+  /* MAIN LAYOUT */
+  .app {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* PAGE SECTIONS */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 2rem 1rem 2.5rem;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 3px;
+    color: var(--dark);
+    line-height: 1.05;
+  }
+
+  .hero h1 span { color: var(--blue); }
+
+  .hero p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+    margin: 0.8rem auto 1.5rem;
+    max-width: 520px;
+  }
+
+  /* STAT CARDS ROW */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1.2rem;
+    text-align: center;
+    transition: transform 0.15s;
+  }
+
+  .stat-card:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--dark); }
+
+  .stat-card .emoji { font-size: 2rem; }
+  .stat-card .label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #888; margin: 4px 0 2px; }
+  .stat-card .value { font-family: 'Bangers', cursive; font-size: 1.8rem; letter-spacing: 1px; }
+  .stat-card.green .value { color: var(--green); }
+  .stat-card.red .value { color: var(--red); }
+  .stat-card.blue .value { color: var(--blue); }
+  .stat-card.purple .value { color: var(--purple); }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 3px;
+    background: var(--dark);
+    border-radius: 2px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* FORMS */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .form-group label {
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555;
+  }
+
+  .form-group input, .form-group select {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 12px;
+    border: 2.5px solid var(--dark);
+    border-radius: 8px;
+    background: white;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--blue);
+    box-shadow: 3px 3px 0 var(--blue);
+  }
+
+  /* BUTTONS */
+  .btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 10px 22px;
+    border: 2.5px solid var(--dark);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.12s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--dark); }
+  .btn:active { transform: translate(0,0); box-shadow: none; }
+
+  .btn-primary { background: var(--blue); color: white; }
+  .btn-success { background: var(--green); color: white; }
+  .btn-danger { background: var(--red); color: white; }
+  .btn-yellow { background: var(--yellow); color: var(--dark); }
+  .btn-purple { background: var(--purple); color: white; }
+
+  /* TABLES */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .data-table th {
+    background: var(--dark);
+    color: var(--yellow);
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    padding: 10px 14px;
+    text-align: left;
+  }
+
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 2px solid #eee;
+    font-weight: 600;
+  }
+
+  .data-table tr:hover td { background: rgba(27,79,255,0.05); }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--dark);
+  }
+
+  .badge-green { background: #CCFFCC; color: #007700; }
+  .badge-red { background: #FFE0E0; color: #BB0000; }
+  .badge-blue { background: #E0E8FF; color: var(--blue); }
+
+  /* CALCULATOR PAGE */
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) { .calc-grid { grid-template-columns: 1fr; } }
+
+  .result-box {
+    background: var(--dark);
+    color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .result-box h3 { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--yellow); letter-spacing: 1px; margin-bottom: 1rem; }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .result-row:last-child { border-bottom: none; font-size: 1.1rem; }
+  .result-row .amount { color: var(--yellow); font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 0.5px; }
+  .result-row.profit .amount { color: var(--green); font-size: 1.3rem; }
+  .result-row.loss .amount { color: var(--red); }
+
+  /* CHATBOT */
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+    background: white;
+    border: var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .chat-header {
+    background: var(--dark);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-header .avatar {
+    width: 40px; height: 40px;
+    background: var(--yellow);
+    border-radius: 50%;
+    border: 2px solid var(--yellow);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .chat-header .info h3 {
+    font-family: 'Bangers', cursive;
+    color: var(--yellow);
+    letter-spacing: 1.5px;
+    font-size: 1.2rem;
+  }
+
+  .chat-header .info p { color: #aaa; font-size: 0.75rem; font-weight: 600; }
+
+  .online-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #FAFAFA;
+  }
+
+  .msg {
+    display: flex;
+    gap: 8px;
+    max-width: 85%;
+    animation: slideIn 0.2s ease;
+  }
+
+  @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+
+  .msg-bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+    border: 2px solid var(--dark);
+  }
+
+  .msg.bot .msg-bubble { background: white; border-radius: 4px 14px 14px 14px; }
+  .msg.user .msg-bubble { background: var(--blue); color: white; border-radius: 14px 4px 14px 14px; border-color: var(--blue); }
+
+  .msg-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    border: 2px solid var(--dark);
+  }
+
+  .msg.bot .msg-avatar { background: var(--yellow); }
+  .msg.user .msg-avatar { background: var(--purple); }
+
+  .typing {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 8px 14px;
+  }
+
+  .typing span {
+    width: 7px; height: 7px;
+    background: #aaa;
+    border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+  .chat-input-area {
+    padding: 14px;
+    background: white;
+    border-top: 2px solid #eee;
+    display: flex;
+    gap: 10px;
+  }
+
+  .chat-input-area input {
+    flex: 1;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 10px 14px;
+    border: 2.5px solid var(--dark);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .chat-input-area input:focus { border-color: var(--blue); }
+
+  .quick-btns {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 8px 14px 0;
+    background: white;
+    border-top: 1px solid #eee;
+  }
+
+  .quick-btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 5px 12px;
+    background: var(--light);
+    border: 2px solid var(--dark);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+  }
+
+  .quick-btn:hover { background: var(--yellow); transform: translateY(-1px); }
+
+  /* TIPS PAGE */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .tip-card {
+    background: var(--card-bg);
+    border: var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1.3rem;
+    transition: transform 0.15s;
+  }
+
+  .tip-card:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--dark); }
+
+  .tip-card .tip-icon { font-size: 2.2rem; margin-bottom: 10px; }
+  .tip-card h3 { font-family: 'Bangers', cursive; font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 6px; }
+  .tip-card p { font-size: 0.88rem; color: #555; line-height: 1.6; font-weight: 600; }
+
+  /* Empty state */
+  .empty { text-align: center; padding: 2.5rem; color: #aaa; }
+  .empty .empty-icon { font-size: 3rem; margin-bottom: 8px; }
+  .empty p { font-weight: 700; }
+
+  /* Tabs within pages */
+  .tabs { display: flex; gap: 6px; margin-bottom: 1.2rem; }
+  .tab-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    border: 2.5px solid var(--dark);
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.12s;
+  }
+  .tab-btn.active, .tab-btn:hover { background: var(--dark); color: white; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Range slider */
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    outline: none;
+    margin-top: 8px;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; height: 20px;
+    background: var(--blue);
+    border-radius: 50%;
+    border: 2px solid var(--dark);
+    cursor: pointer;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar { width: 4px; }
+  .scrollbar-hide::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🚀 KidBiz HQ</div>
+  <nav>
+    <button class="active" onclick="showPage('dashboard')">🏠 Home</button>
+    <button onclick="showPage('tracker')">💰 Tracker</button>
+    <button onclick="showPage('calculator')">🧮 Calculator</button>
+    <button onclick="showPage('chatbot')">🤖 Ask Bizzy</button>
+    <button onclick="showPage('tips')">💡 Tips</button>
+  </nav>
+</header>
+
+<div class="app">
+
+  <!-- DASHBOARD -->
+  <div class="page active" id="page-dashboard">
+    <div class="hero">
+      <h1>Your <span>Business</span> Command Center 🎯</h1>
+      <p>Track your sales, calculate costs, and get advice — all in one place!</p>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card green">
+        <div class="emoji">💵</div>
+        <div class="label">Total Earned</div>
+        <div class="value" id="dash-earned">$0.00</div>
+      </div>
+      <div class="stat-card red">
+        <div class="emoji">📦</div>
+        <div class="label">Total Spent</div>
+        <div class="value" id="dash-spent">$0.00</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="emoji">🏆</div>
+        <div class="label">Net Profit</div>
+        <div class="value" id="dash-profit">$0.00</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="emoji">📋</div>
+        <div class="label">Transactions</div>
+        <div class="value" id="dash-txns">0</div>
+      </div>
+    </div>
+
+    <div class="section-title">🌟 Quick Actions</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;">
+      <button class="btn btn-success" style="justify-content:center;padding:18px;" onclick="showPage('tracker')">➕ Log a Sale</button>
+      <button class="btn btn-primary" style="justify-content:center;padding:18px;" onclick="showPage('tracker');switchTab('expenses')">💸 Log an Expense</button>
+      <button class="btn btn-yellow" style="justify-content:center;padding:18px;" onclick="showPage('calculator')">🧮 Calculate Costs</button>
+      <button class="btn btn-purple" style="justify-content:center;padding:18px;" onclick="showPage('chatbot')">🤖 Ask Bizzy</button>
+    </div>
+
+    <div class="section-title">📰 Recent Activity</div>
+    <div class="card" id="dash-recent">
+      <div class="empty"><div class="empty-icon">📭</div><p>No transactions yet! Add a sale or expense to get started.</p></div>
+    </div>
+  </div>
+
+  <!-- TRACKER -->
+  <div class="page" id="page-tracker">
+    <div class="section-title">💰 Money Tracker</div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('sales')">🤑 Sales</button>
+      <button class="tab-btn" onclick="switchTab('expenses')">💸 Expenses</button>
+    </div>
+
+    <!-- SALES TAB -->
+    <div class="tab-content active" id="tab-sales">
+      <div class="card">
+        <div class="section-title" style="font-size:1.3rem;">Add a Sale 🎉</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>What did you sell?</label>
+            <input type="text" id="sale-item" placeholder="e.g. Issue #1 Comic">
+          </div>
+          <div class="form-group">
+            <label>How many?</label>
+            <input type="number" id="sale-qty" placeholder="e.g. 5" min="1" value="1">
+          </div>
+          <div class="form-group">
+            <label>Price per item ($)</label>
+            <input type="number" id="sale-price" placeholder="e.g. 3.00" min="0" step="0.01">
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="sale-date">
+          </div>
+        </div>
+        <div style="margin-top:1rem;">
+          <button class="btn btn-success" onclick="addSale()">➕ Add Sale</button>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table class="data-table" id="sales-table">
+          <thead><tr><th>Item</th><th>Qty</th><th>Price</th><th>Total</th><th>Date</th><th></th></tr></thead>
+          <tbody id="sales-tbody">
+            <tr><td colspan="6"><div class="empty"><div class="empty-icon">🛒</div><p>No sales yet — go sell something!</p></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EXPENSES TAB -->
+    <div class="tab-content" id="tab-expenses">
+      <div class="card">
+        <div class="section-title" style="font-size:1.3rem;">Add an Expense 📦</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>What did you buy?</label>
+            <input type="text" id="exp-item" placeholder="e.g. Printing paper">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="exp-category">
+              <option value="Printing">🖨️ Printing</option>
+              <option value="Supplies">✏️ Supplies</option>
+              <option value="Ink & Toner">🖋️ Ink & Toner</option>
+              <option value="Paper">📄 Paper</option>
+              <option value="Marketing">📢 Marketing</option>
+              <option value="Tools">🔧 Tools</option>
+              <option value="Other">📦 Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Amount ($)</label>
+            <input type="number" id="exp-amount" placeholder="e.g. 12.50" min="0" step="0.01">
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="exp-date">
+          </div>
+        </div>
+        <div style="margin-top:1rem;">
+          <button class="btn btn-danger" onclick="addExpense()">➕ Add Expense</button>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table class="data-table" id="exp-table">
+          <thead><tr><th>Item</th><th>Category</th><th>Amount</th><th>Date</th><th></th></tr></thead>
+          <tbody id="exp-tbody">
+            <tr><td colspan="5"><div class="empty"><div class="empty-icon">🧾</div><p>No expenses yet!</p></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="page" id="page-calculator">
+    <div class="section-title">🧮 Cost Calculator</div>
+    <p style="font-weight:600;color:#555;margin-bottom:1.5rem;">Figure out how much it costs to make your product and how much to charge!</p>
+    <div class="calc-grid">
+      <div>
+        <div class="card">
+          <div class="section-title" style="font-size:1.3rem;">📄 Paper & Printing</div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="form-group">
+              <label>Paper cost per ream (500 sheets) $</label>
+              <input type="number" id="c-paper-ream" value="6.00" step="0.01" oninput="calcCost()">
+            </div>
+            <div class="form-group">
+              <label>Sheets per comic</label>
+              <input type="number" id="c-sheets" value="8" min="1" oninput="calcCost()">
+              <input type="range" id="c-sheets-r" min="1" max="50" value="8" oninput="syncRange('c-sheets','c-sheets-r');calcCost()">
+            </div>
+            <div class="form-group">
+              <label>Ink cost per page ($) <span style="color:#aaa;font-size:0.75rem;">≈ $0.03 inkjet, $0.01 laser</span></label>
+              <input type="number" id="c-ink" value="0.03" step="0.01" oninput="calcCost()">
+            </div>
+            <div class="form-group">
+              <label>Copies to make</label>
+              <input type="number" id="c-copies" value="20" min="1" oninput="calcCost()">
+              <input type="range" id="c-copies-r" min="1" max="500" value="20" oninput="syncRange('c-copies','c-copies-r');calcCost()">
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title" style="font-size:1.3rem;">💼 Other Costs</div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="form-group">
+              <label>Staples / binding per comic ($)</label>
+              <input type="number" id="c-binding" value="0.05" step="0.01" oninput="calcCost()">
+            </div>
+            <div class="form-group">
+              <label>Cover art / extra supplies ($)</label>
+              <input type="number" id="c-extra" value="0.00" step="0.01" oninput="calcCost()">
+            </div>
+            <div class="form-group">
+              <label>Your selling price per copy ($)</label>
+              <input type="number" id="c-sellprice" value="5.00" step="0.01" oninput="calcCost()">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="result-box" id="calc-result">
+          <h3>📊 Your Numbers</h3>
+          <div class="result-row"><span>Paper cost per comic</span><span class="amount" id="r-paper">$0.00</span></div>
+          <div class="result-row"><span>Ink cost per comic</span><span class="amount" id="r-ink">$0.00</span></div>
+          <div class="result-row"><span>Binding per comic</span><span class="amount" id="r-bind">$0.00</span></div>
+          <div class="result-row"><span>Other per comic</span><span class="amount" id="r-extra">$0.00</span></div>
+          <div class="result-row" style="border-top:1px solid rgba(255,255,255,0.3);margin-top:6px;padding-top:10px;"><span>💰 Total cost per comic</span><span class="amount" id="r-cost">$0.00</span></div>
+          <div class="result-row"><span>🏷️ Your sell price</span><span class="amount" id="r-sell">$0.00</span></div>
+          <div class="result-row profit"><span>🎉 Profit per comic</span><span class="amount" id="r-profit-one">$0.00</span></div>
+          <div style="margin-top:1rem;height:1px;background:rgba(255,255,255,0.2);"></div>
+          <div class="result-row" style="margin-top:10px;"><span>📦 Total cost for all copies</span><span class="amount" id="r-total-cost">$0.00</span></div>
+          <div class="result-row profit" id="r-total-row"><span>🚀 Total profit if all sold</span><span class="amount" id="r-total-profit">$0.00</span></div>
+          <div style="margin-top:1.2rem;padding:14px;background:rgba(255,255,255,0.07);border-radius:10px;font-size:0.82rem;color:#ccc;">
+            <div id="r-advice" style="line-height:1.7;font-weight:600;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHATBOT -->
+  <div class="page" id="page-chatbot">
+    <div class="section-title">🤖 Ask Bizzy</div>
+    <p style="font-weight:600;color:#555;margin-bottom:1.2rem;">Bizzy is your AI business buddy! Ask anything about running your kid business.</p>
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="avatar">🤖</div>
+        <div class="info">
+          <h3>BIZZY the Biz Bot</h3>
+          <p><span class="online-dot"></span>Online & ready to help!</p>
+        </div>
+      </div>
+      <div class="quick-btns">
+        <button class="quick-btn" onclick="quickAsk('How much should I charge for my comic?')">💰 Pricing help</button>
+        <button class="quick-btn" onclick="quickAsk('How much does printing cost?')">🖨️ Printing costs</button>
+        <button class="quick-btn" onclick="quickAsk('How do I get more customers?')">📢 Get customers</button>
+        <button class="quick-btn" onclick="quickAsk('What is profit?')">📊 What is profit?</button>
+        <button class="quick-btn" onclick="quickAsk('How do I save my money?')">🐷 Save money</button>
+        <button class="quick-btn" onclick="quickAsk('I made 10 comics and spent $5, sold each for $3. Did I make money?')">🧮 Example math</button>
+      </div>
+      <div class="chat-messages scrollbar-hide" id="chat-messages"></div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Ask Bizzy anything about your business..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="btn btn-primary" onclick="sendChat()">Send 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="page" id="page-tips">
+    <div class="section-title">💡 Business Tips for Kids</div>
+    <p style="font-weight:600;color:#555;margin-bottom:1.5rem;">Smart stuff to help your business grow! 🌱</p>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">💸</div>
+        <h3>Know Your Costs First</h3>
+        <p>Before you sell anything, add up ALL your costs — paper, ink, staples, everything. Your selling price must be higher than your costs or you'll lose money!</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🏷️</div>
+        <h3>Price It Right</h3>
+        <p>A good rule: charge at least 2–3× what it cost to make. If a comic costs $1 to make, charge $2–$3. This is your <strong>profit margin</strong>!</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🖨️</div>
+        <h3>Print Smart</h3>
+        <p>Black-and-white printing is WAY cheaper than color. A laser printer costs about $0.01/page vs $0.10+ for color inkjet. Print a test copy first before making lots!</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📣</div>
+        <h3>Tell Everyone!</h3>
+        <p>Word-of-mouth is free advertising. Tell friends, family, and neighbors. Ask happy customers to tell their friends. Make a poster for school (if allowed)!</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📓</div>
+        <h3>Write Everything Down</h3>
+        <p>Track every dollar you spend AND make. Use this app! Knowing your numbers helps you make smarter decisions about your business.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🐷</div>
+        <h3>Save Before You Spend</h3>
+        <p>Put at least 20% of profits into savings for your next project. Don't spend all your earnings right away — reinvest some to grow!</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🤝</div>
+        <h3>Split Profits Fairly</h3>
+        <p>Working with friends? Decide BEFORE you start how to split the money. Write it down so everyone agrees. Decide who does what work too!</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎁</div>
+        <h3>Make Bundles</h3>
+        <p>Sell Issue 1 + Issue 2 together at a small discount. Bundles feel like a deal for customers and you sell more at once — win-win!</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⭐</div>
+        <h3>Quality Matters</h3>
+        <p>A comic that looks great and is fun to read will get people coming back for more. Spend time making something you're proud of!</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── STATE ───────────────────────────────────────────
+let sales = JSON.parse(localStorage.getItem('kb-sales') || '[]');
+let expenses = JSON.parse(localStorage.getItem('kb-expenses') || '[]');
+
+// ─── NAVIGATION ──────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const idx = ['dashboard','tracker','calculator','chatbot','tips'].indexOf(id);
+  document.querySelectorAll('nav button')[idx]?.classList.add('active');
+  if (id === 'dashboard') updateDashboard();
+  if (id === 'calculator') calcCost();
+  if (id === 'chatbot') initChat();
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  const idx = tab === 'sales' ? 0 : 1;
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+}
+
+// ─── SALES ───────────────────────────────────────────
+function addSale() {
+  const item = document.getElementById('sale-item').value.trim();
+  const qty = parseInt(document.getElementById('sale-qty').value) || 1;
+  const price = parseFloat(document.getElementById('sale-price').value) || 0;
+  const date = document.getElementById('sale-date').value || new Date().toISOString().split('T')[0];
+  if (!item || !price) { alert('Please fill in the item name and price!'); return; }
+  sales.push({ id: Date.now(), item, qty, price, date });
+  localStorage.setItem('kb-sales', JSON.stringify(sales));
+  renderSales();
+  document.getElementById('sale-item').value = '';
+  document.getElementById('sale-qty').value = '1';
+  document.getElementById('sale-price').value = '';
+}
+
+function deleteSale(id) {
+  sales = sales.filter(s => s.id !== id);
+  localStorage.setItem('kb-sales', JSON.stringify(sales));
+  renderSales();
+}
+
+function renderSales() {
+  const tbody = document.getElementById('sales-tbody');
+  if (!sales.length) {
+    tbody.innerHTML = `<tr><td colspan="6"><div class="empty"><div class="empty-icon">🛒</div><p>No sales yet — go sell something!</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = [...sales].reverse().map(s => `
+    <tr>
+      <td><strong>${s.item}</strong></td>
+      <td>${s.qty}</td>
+      <td>$${parseFloat(s.price).toFixed(2)}</td>
+      <td><span class="badge badge-green">$${(s.qty * s.price).toFixed(2)}</span></td>
+      <td>${s.date}</td>
+      <td><button class="btn btn-danger" style="padding:4px 10px;font-size:0.75rem;" onclick="deleteSale(${s.id})">✕</button></td>
+    </tr>`).join('');
+}
+
+// ─── EXPENSES ────────────────────────────────────────
+function addExpense() {
+  const item = document.getElementById('exp-item').value.trim();
+  const category = document.getElementById('exp-category').value;
+  const amount = parseFloat(document.getElementById('exp-amount').value) || 0;
+  const date = document.getElementById('exp-date').value || new Date().toISOString().split('T')[0];
+  if (!item || !amount) { alert('Please fill in the item and amount!'); return; }
+  expenses.push({ id: Date.now(), item, category, amount, date });
+  localStorage.setItem('kb-expenses', JSON.stringify(expenses));
+  renderExpenses();
+  document.getElementById('exp-item').value = '';
+  document.getElementById('exp-amount').value = '';
+}
+
+function deleteExpense(id) {
+  expenses = expenses.filter(e => e.id !== id);
+  localStorage.setItem('kb-expenses', JSON.stringify(expenses));
+  renderExpenses();
+}
+
+function renderExpenses() {
+  const tbody = document.getElementById('exp-tbody');
+  if (!expenses.length) {
+    tbody.innerHTML = `<tr><td colspan="5"><div class="empty"><div class="empty-icon">🧾</div><p>No expenses yet!</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = [...expenses].reverse().map(e => `
+    <tr>
+      <td><strong>${e.item}</strong></td>
+      <td><span class="badge badge-blue">${e.category}</span></td>
+      <td><span class="badge badge-red">$${parseFloat(e.amount).toFixed(2)}</span></td>
+      <td>${e.date}</td>
+      <td><button class="btn btn-danger" style="padding:4px 10px;font-size:0.75rem;" onclick="deleteExpense(${e.id})">✕</button></td>
+    </tr>`).join('');
+}
+
+// ─── DASHBOARD ───────────────────────────────────────
+function updateDashboard() {
+  const totalEarned = sales.reduce((s, x) => s + x.qty * x.price, 0);
+  const totalSpent = expenses.reduce((s, x) => s + x.amount, 0);
+  const profit = totalEarned - totalSpent;
+  document.getElementById('dash-earned').textContent = '$' + totalEarned.toFixed(2);
+  document.getElementById('dash-spent').textContent = '$' + totalSpent.toFixed(2);
+  const profitEl = document.getElementById('dash-profit');
+  profitEl.textContent = '$' + profit.toFixed(2);
+  profitEl.style.color = profit >= 0 ? 'var(--green)' : 'var(--red)';
+  document.getElementById('dash-txns').textContent = sales.length + expenses.length;
+  const recentDiv = document.getElementById('dash-recent');
+  const all = [
+    ...sales.map(s => ({ type: 'sale', label: s.item, amount: s.qty * s.price, date: s.date })),
+    ...expenses.map(e => ({ type: 'expense', label: e.item, amount: e.amount, date: e.date }))
+  ].sort((a,b) => b.date.localeCompare(a.date)).slice(0, 6);
+  if (!all.length) {
+    recentDiv.innerHTML = `<div class="empty"><div class="empty-icon">📭</div><p>No transactions yet!</p></div>`;
+    return;
+  }
+  recentDiv.innerHTML = all.map(t => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:2px solid #f0f0f0;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.4rem;">${t.type==='sale'?'💵':'💸'}</span>
+        <div>
+          <div style="font-weight:800;">${t.label}</div>
+          <div style="font-size:0.75rem;color:#aaa;font-weight:700;">${t.date}</div>
+        </div>
+      </div>
+      <span class="badge ${t.type==='sale'?'badge-green':'badge-red'}">${t.type==='sale'?'+':'-'}$${t.amount.toFixed(2)}</span>
+    </div>`).join('');
+}
+
+// ─── CALCULATOR ──────────────────────────────────────
+function v(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+function calcCost() {
+  const reamCost = v('c-paper-ream');
+  const sheets = v('c-sheets');
+  const ink = v('c-ink');
+  const copies = v('c-copies');
+  const binding = v('c-binding');
+  const extra = v('c-extra');
+  const sellPrice = v('c-sellprice');
+
+  const paperPerComic = (reamCost / 500) * sheets;
+  const inkPerComic = ink * sheets;
+  const costPerComic = paperPerComic + inkPerComic + binding + extra;
+  const profitPerComic = sellPrice - costPerComic;
+  const totalCost = costPerComic * copies;
+  const totalProfit = profitPerComic * copies;
+
+  document.getElementById('r-paper').textContent = '$' + paperPerComic.toFixed(3);
+  document.getElementById('r-ink').textContent = '$' + inkPerComic.toFixed(3);
+  document.getElementById('r-bind').textContent = '$' + binding.toFixed(2);
+  document.getElementById('r-extra').textContent = '$' + extra.toFixed(2);
+  document.getElementById('r-cost').textContent = '$' + costPerComic.toFixed(3);
+  document.getElementById('r-sell').textContent = '$' + sellPrice.toFixed(2);
+  document.getElementById('r-profit-one').textContent = '$' + profitPerComic.toFixed(2);
+  document.getElementById('r-total-cost').textContent = '$' + totalCost.toFixed(2);
+  document.getElementById('r-total-profit').textContent = '$' + totalProfit.toFixed(2);
+  const pr = document.getElementById('r-total-row');
+  pr.className = 'result-row ' + (totalProfit >= 0 ? 'profit' : 'loss');
+
+  let advice = '';
+  if (sellPrice <= costPerComic) {
+    advice = `⚠️ Uh oh! You're charging less than it costs to make! Raise your price to at least <strong>$${(costPerComic * 2).toFixed(2)}</strong> to make a good profit.`;
+  } else if (profitPerComic / sellPrice < 0.3) {
+    advice = `📊 Your profit margin is ${((profitPerComic/sellPrice)*100).toFixed(0)}%. Try to aim for 50%+ — consider charging <strong>$${(costPerComic * 2).toFixed(2)}</strong> per copy!`;
+  } else {
+    advice = `🎉 Great pricing! You make <strong>$${profitPerComic.toFixed(2)}</strong> per comic — that's a ${((profitPerComic/sellPrice)*100).toFixed(0)}% margin. If you sell all ${copies} copies, you'll earn <strong>$${totalProfit.toFixed(2)}</strong>!`;
+  }
+  document.getElementById('r-advice').innerHTML = advice;
+  syncRange('c-sheets', 'c-sheets-r');
+  syncRange('c-copies', 'c-copies-r');
+}
+
+function syncRange(inputId, rangeId) {
+  const i = document.getElementById(inputId);
+  const r = document.getElementById(rangeId);
+  if (document.activeElement === r) i.value = r.value;
+  else r.value = i.value;
+}
+
+// ─── CHATBOT ─────────────────────────────────────────
+let chatHistory = [];
+let chatReady = false;
+
+function initChat() {
+  if (chatReady) return;
+  chatReady = true;
+  addBotMessage("Hey there! 👋 I'm **Bizzy**, your business buddy bot! I can help you figure out:\n\n• 💰 How much to charge for your comics\n• 🖨️ Printing and ink costs\n• 📈 How to make more profit\n• 📢 How to get more customers\n• 🧮 Any business math you need!\n\nWhat's on your mind?");
+}
+
+function addBotMessage(text) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble">${text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addUserMessage(text) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg user';
+  div.innerHTML = `<div class="msg-avatar">😊</div><div class="msg-bubble">${text}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.id = 'typing-indicator';
+  div.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+function quickAsk(q) {
+  document.getElementById('chat-input').value = q;
+  sendChat();
+}
+
+function getBizzyReply(text) {
+  const q = text.toLowerCase();
+  const totalEarned = sales.reduce((s, x) => s + x.qty * x.price, 0);
+  const totalSpent = expenses.reduce((s, x) => s + x.amount, 0);
+  const profit = totalEarned - totalSpent;
+
+  // ── Math / numbers in question ──────────────────────
+  const madeMatch = q.match(/made\s+(\d+)\s+comic/);
+  const spentMatch = q.match(/spent\s+\$?([\d.]+)/);
+  const soldMatch = q.match(/sold\s+(?:each\s+)?for\s+\$?([\d.]+)/);
+  const copiesMatch = q.match(/(\d+)\s+cop(?:y|ies)/);
+  const priceMatch = q.match(/\$?([\d.]+)\s+(?:each|per|a\s+copy)/);
+  if ((madeMatch || copiesMatch) && spentMatch && soldMatch) {
+    const copies = parseInt((madeMatch||copiesMatch)[1]);
+    const spent = parseFloat(spentMatch[1]);
+    const sellPrice = parseFloat(soldMatch[1]);
+    const revenue = copies * sellPrice;
+    const profitCalc = revenue - spent;
+    const costEach = (spent / copies).toFixed(3);
+    if (profitCalc > 0) {
+      return `🧮 Let me crunch those numbers!\n\n• You made **${copies} comics** and spent **$${spent.toFixed(2)}**\n• Cost per comic: **$${costEach}**\n• Revenue (${copies} × $${sellPrice}): **$${revenue.toFixed(2)}**\n• **Your profit: $${profitCalc.toFixed(2)}** 🎉\n\nYes, you made money! That's a **${((profitCalc/revenue)*100).toFixed(0)}% profit margin** — awesome work! 🚀`;
+    } else if (profitCalc === 0) {
+      return `🧮 Here's the math:\n\n• Spent: **$${spent.toFixed(2)}**, Earned: **$${revenue.toFixed(2)}**\n• Profit: **$0.00** — you broke even!\n\nYou didn't lose money, but you didn't make any either. Try raising your price to **$${(spent/copies * 2.5).toFixed(2)}** per comic to make a real profit! 💪`;
+    } else {
+      return `🧮 Uh oh, let's look at those numbers:\n\n• Spent: **$${spent.toFixed(2)}**, Earned: **$${revenue.toFixed(2)}**\n• You **lost $${Math.abs(profitCalc).toFixed(2)}** 😬\n\nDon't worry — raise your price! Each comic costs **$${costEach}** to make, so charge at least **$${(spent/copies * 2.5).toFixed(2)}** to make a good profit!`;
+    }
+  }
+
+  // ── My stats ────────────────────────────────────────
+  if (q.includes('my business') || q.includes('my stats') || q.includes('how am i doing') || q.includes('how is my')) {
+    if (sales.length + expenses.length === 0) return `📊 I don't see any data yet! Head to the **💰 Tracker** tab and log your first sale or expense. Once you do, I can tell you exactly how your business is doing!`;
+    return `📊 Here's how your business is looking:\n\n• 💵 Total earned: **$${totalEarned.toFixed(2)}**\n• 💸 Total spent: **$${totalSpent.toFixed(2)}**\n• ${profit >= 0 ? '🎉' : '⚠️'} Net profit: **$${profit.toFixed(2)}**\n• 📋 Transactions logged: **${sales.length + expenses.length}**\n\n${profit > 0 ? "You're in the green — great job! Keep it up! 🚀" : profit === 0 ? "You're breaking even. Try to sell more or cut costs! 💪" : "You're spending more than you're earning. Check your pricing in the 🧮 Calculator!"}`;
+  }
+
+  // ── Printing costs ──────────────────────────────────
+  if (q.includes('print') || q.includes('ink') || q.includes('toner') || q.includes('copy shop') || q.includes('photocopy')) {
+    return `🖨️ Great question about printing costs! Here's the breakdown:\n\n• **Home inkjet printer** — about **$0.03/page** (black & white) or **$0.08–0.15/page** (color)\n• **Home laser printer** — about **$0.01–0.02/page** — cheapest option!\n• **Library / copy shop** — usually **$0.10–0.25/page** but much better quality\n• **Paper** — a ream of 500 sheets costs about **$6–10**\n\n💡 **Pro tip:** Print in black & white to save money! A laser printer pays for itself if you're printing lots of comics. Use the **🧮 Calculator** to see your exact costs!`;
+  }
+
+  // ── Pricing / how much to charge ────────────────────
+  if (q.includes('how much') && (q.includes('charge') || q.includes('sell') || q.includes('price') || q.includes('cost'))) {
+    return `💰 Pricing your comic is super important! Here's the magic formula:\n\n1. **Find your cost** — add up paper + ink + staples per comic\n2. **Multiply by 2 or 3** — that's your selling price!\n3. **Example:** If it costs $1.00 to make, charge **$2.00–$3.00**\n\n📊 This gives you a 50–67% profit margin, which is great!\n\n**Typical comic prices for kids:**\n• Mini comics (8 pages): **$1–3**\n• Regular comics (16–24 pages): **$3–6**\n• Special editions: **$5–10**\n\nUse the **🧮 Calculator** to get exact numbers for YOUR comic! 🚀`;
+  }
+
+  // ── What is profit ──────────────────────────────────
+  if (q.includes('what is profit') || q.includes('what\'s profit') || (q.includes('profit') && q.includes('mean'))) {
+    return `📈 Profit is the money you have LEFT after paying for everything!\n\n**Simple formula:**\n💰 Money you earned\n➖ Money you spent\n**= Profit!**\n\n**Example:** You sell 10 comics at $3 each = **$30 earned**. You spent $8 on paper and ink. Your profit = **$30 - $8 = $22!** 🎉\n\nIf profit is POSITIVE — you made money! ✅\nIf profit is NEGATIVE — you lost money. Fix your prices! ❌\n\nAlways aim to keep your costs LOW and your prices HIGH enough to make a good profit! 💪`;
+  }
+
+  // ── Saving money ────────────────────────────────────
+  if (q.includes('save') || q.includes('saving') || q.includes('piggy') || q.includes('bank')) {
+    return `🐷 Smart thinking — saving is SO important!\n\n**The 3-jar system for kid businesses:**\n• 🏦 **Save jar (20%)** — for future business supplies or big purchases\n• 💼 **Business jar (30%)** — to buy supplies for your next batch of comics\n• 🎉 **Spend jar (50%)** — your reward for all your hard work!\n\n**Example:** You make $20 profit → put $4 in savings, $6 back into the business, keep $10! This way your business keeps growing AND you get to enjoy your earnings. 🚀`;
+  }
+
+  // ── Getting customers ────────────────────────────────
+  if (q.includes('customer') || q.includes('sell more') || q.includes('advertis') || q.includes('market') || q.includes('people buy')) {
+    return `📢 Getting customers is all about spreading the word! Try these:\n\n• 🗣️ **Tell everyone** — friends, family, neighbors. Word of mouth is free!\n• 📋 **Make a flyer** — ask if you can put one up at school (with permission!)\n• 🎁 **Give a free sample** — let someone read Issue 1 for free, then they'll want Issue 2!\n• 📦 **Bundle deal** — "Buy 2 issues, get $1 off!" feels like a bargain\n• 🤝 **Ask for reviews** — happy readers who tell their friends = free advertising!\n• 🎨 **Make a cool cover** — people judge books (and comics!) by their covers\n\nStart with people you know and grow from there! 🌱`;
+  }
+
+  // ── Splitting profits / working with friends ─────────
+  if (q.includes('split') || q.includes('friend') || q.includes('partner') || q.includes('team') || q.includes('share')) {
+    return `🤝 Working with friends is awesome — but talk about money FIRST!\n\n**Before you start, agree on:**\n• Who does what job? (writer, artist, printer, salesperson)\n• How do you split profits? (equal? or based on work done?)\n• Who pays for supplies upfront?\n• What if someone wants to quit?\n\n**Common splits:**\n• Equal work → **50/50** (or 33/33/33 for 3 people)\n• One person does more → **60/40** or **70/30**\n\n💡 **Write it down** — even just a note in a notebook! It prevents arguments later. Treat your friends fairly and your team will last! 💪`;
+  }
+
+  // ── Paper costs ──────────────────────────────────────
+  if (q.includes('paper') || q.includes('sheet')) {
+    return `📄 Paper costs explained!\n\n• A **ream** = 500 sheets of paper\n• Cost: about **$6–10** for a standard ream\n• That means each sheet costs about **$0.01–0.02**\n• A comic with 8 pages uses 4 sheets (front + back)\n• So paper for one comic = about **$0.04–0.08**\n\n💡 Buy paper in bulk at big stores like Walmart, Target, or Costco to get the cheapest price per sheet! Dollar stores sometimes have great deals too. 🛍️`;
+  }
+
+  // ── Staples / binding ────────────────────────────────
+  if (q.includes('stapl') || q.includes('bind') || q.includes('fold')) {
+    return `📎 Binding your comic doesn't have to cost much!\n\n• **Staples** — a box of 5,000 staples costs about $3–5. That's **less than $0.01** per comic! 🤩\n• **Fold & staple** — fold your pages in half and staple in the middle (called "saddle stitching") — this is how real comic books are made!\n• **Binder clips** — free if you have them, but not as professional\n• **Tape spine** — use washi tape for a colorful spine!\n\nStapling is definitely the cheapest and easiest option. Two staples per comic and you're done! ✂️`;
+  }
+
+  // ── How many to print ────────────────────────────────
+  if (q.includes('how many') && (q.includes('print') || q.includes('make') || q.includes('cop'))) {
+    return `🖨️ How many copies to print? Great question!\n\n**Start small — here's why:**\n• Print **10–20** for your first run\n• Sell those first to see if people like it\n• Then print more based on demand!\n\n**Printing more = cheaper per copy**, but only if you can sell them all!\n\n**Rule of thumb:**\n• 10 copies → test if people want it\n• 25 copies → you know it's popular\n• 50+ copies → you've got a hit! 🎉\n\nUse the **🧮 Calculator** to see how your cost per comic changes based on how many you print!`;
+  }
+
+  // ── What business can I start ────────────────────────
+  if (q.includes('what business') || q.includes('business idea') || q.includes('what can i sell') || q.includes('ideas')) {
+    return `💡 So many awesome business ideas for kids!\n\n**Creative stuff:**\n• 📚 Comics (like you're doing!) or zines\n• 🎨 Custom drawings or portraits\n• 🃏 Handmade cards (birthday, holidays)\n• 🧁 Baked goods (with a parent's help)\n\n**Services:**\n• 🌿 Lawn mowing or gardening\n• 🐕 Dog walking or pet sitting\n• 🚗 Car washing\n• 📚 Tutoring younger kids\n\n**Digital stuff:**\n• 🎮 Teaching games to adults\n• 📸 Photography\n\nYour comic business is ALREADY a great one — keep going! The skills you learn now will help you forever. 🌟`;
+  }
+
+  // ── Expenses / costs ────────────────────────────────
+  if (q.includes('expense') || q.includes('cost') || q.includes('spend')) {
+    return `💸 Tracking your expenses (money you spend) is SUPER important!\n\n**For a comic business, your main costs are:**\n• 📄 Paper — ~$0.01–0.02 per sheet\n• 🖨️ Ink — ~$0.03 per page (inkjet B&W)\n• 📎 Staples — less than $0.01 each\n• ✏️ Pens/markers for drawing — one-time cost\n• 🖼️ Cover cardstock (optional) — ~$0.05 per cover\n\n**Total per comic: usually $0.15–$0.50** if printing at home!\n\nLog all your expenses in the **💰 Tracker** tab so nothing gets forgotten. Every penny counts! 🧮`;
+  }
+
+  // ── Hello / hi ───────────────────────────────────────
+  if (q.match(/^(hi|hello|hey|sup|yo|hiya|howdy)/)) {
+    return `Hey hey hey! 👋🎉 So great to meet you! I'm **Bizzy**, your personal business buddy!\n\nI can help you with:\n• 💰 **Pricing** your comics the right way\n• 🖨️ **Printing costs** — paper, ink, everything\n• 📊 **Profit math** — did you make money?\n• 📢 **Getting more customers**\n• 🤝 **Splitting money** with friends\n• 🐷 **Saving your earnings**\n\nWhat do you want to know? Ask me anything! 🚀`;
+  }
+
+  // ── Thank you ───────────────────────────────────────
+  if (q.includes('thank') || q.includes('thanks') || q.includes('awesome') || q.includes('cool') || q.includes('great')) {
+    return `You're so welcome! 🌟 You're going to be an amazing business owner — I can already tell! Keep tracking your numbers, keep making great comics, and don't be afraid to ask for help. You've got this! 💪🚀`;
+  }
+
+  // ── Profit margin ───────────────────────────────────
+  if (q.includes('margin') || q.includes('markup') || q.includes('percent')) {
+    return `📊 Profit margin tells you how much of your selling price is actual profit!\n\n**Formula:** (Profit ÷ Selling Price) × 100 = Margin %\n\n**Example:** Comic costs $1 to make, sells for $3\n→ Profit = $2, Margin = (2÷3)×100 = **67%** — that's great!\n\n**Margin guide:**\n• Under 30% → ⚠️ Too low, raise your price!\n• 30–50% → 👍 Decent, but could be better\n• 50–70% → 🎉 Excellent!\n• 70%+ → 🚀 You're crushing it!\n\nUse the **🧮 Calculator** to see your exact margin!`;
+  }
+
+  // ── Default fallback (smart-ish) ────────────────────
+  const fallbacks = [
+    `🤔 Hmm, that's an interesting question! Here's what I'd say:\n\nFor any kid business, always remember the golden rule: **charge at least 2x your costs** so you always make a profit! 💰\n\nIf you have a more specific question about printing, pricing, profit math, or customers — just ask and I'll give you a detailed answer! 😊`,
+    `💡 Great question! The #1 tip for running a successful kid business is: **know your numbers!**\n\n• Know what things COST to make\n• Know what you're CHARGING\n• Know your PROFIT\n\nUse the **🧮 Calculator** and **💰 Tracker** tabs to stay on top of everything. Want to ask about something specific like printing costs or pricing? I'm here! 🤖`,
+    `🚀 I love your curiosity! Running a business at your age is AMAZING.\n\nHere are some things I'm really good at helping with:\n• 🖨️ How much printing and paper costs\n• 💰 How to price your comics\n• 📊 Calculating your profit\n• 📢 Getting more customers\n• 🤝 Splitting money with friends\n\nAsk me about any of those and I'll give you the full scoop! 😄`,
+  ];
+  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+}
+
+function sendChat() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addUserMessage(text);
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    const reply = getBizzyReply(text);
+    addBotMessage(reply);
+  }, 700 + Math.random() * 500);
+}
+
+// ─── INIT ─────────────────────────────────────────────
+document.getElementById('sale-date').valueAsDate = new Date();
+document.getElementById('exp-date').valueAsDate = new Date();
+renderSales();
+renderExpenses();
+calcCost();
+</script>
+</body>
+</html>
